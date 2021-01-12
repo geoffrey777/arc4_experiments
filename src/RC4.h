@@ -1,14 +1,19 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 //adding ifndef
 
 class RC4 {
     public:
         RC4(std::string key);
-        std::string cipher(std::string text);
+        RC4(std::vector<int> key);
+        std::vector<int> cipher(std::vector<int> plaintext);
+        std::vector<int> cipher(std::string plaintext);
+        std::vector<int> getStream(int n);
     private:
         int S[256];
-        void key_schedule(std::string key);
+        std::vector<int> key;
+        void key_schedule();
 
 };
