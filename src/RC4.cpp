@@ -1,7 +1,5 @@
 #include "RC4.h"
 
-
-
 void RC4::key_schedule(std::string key) {
     int * permutation = this->S;
     
@@ -28,9 +26,10 @@ std::string RC4::cipher(std::string text) {
         int aux = permutation[i];
         permutation[i] = permutation[j];
         permutation[j] = aux;
-        int int_chiffrement = S[S[i] + S[j]];
-        new_text += int_chiffrement ^ t;
+        int int_chiffrement = S[(S[i] + S[j])%256];
+        new_text += std::to_string(int_chiffrement ^ t);
     }
+    return new_text;
 }
 
 RC4::RC4(std::string key) {
