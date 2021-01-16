@@ -1,3 +1,7 @@
+//
+// Created by Nima Alikhani on 15/01/2021.
+//
+
 #include "RC4.h"
 
 void RC4::key_schedule() {
@@ -59,5 +63,3 @@ std::vector<int> RC4::cipher(std::string plaintext) {
     }
     return cipher(vector_plain);
 }
-
-
