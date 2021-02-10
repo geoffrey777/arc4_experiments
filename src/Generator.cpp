@@ -23,7 +23,7 @@ EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n)
 
     enc.iv = iv;
     RC4 rc4_engine = RC4(wep_key);
-    const int substring_len = 15;
+    const int substring_len = 15; // Final plaintext len = 15+3 (header)
     int text_len = text.size();
 
     // https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
@@ -31,10 +31,11 @@ EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n)
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, text_len-substring_len);
 
-    // TODO: AAA
     for(int i=0; i<n; i++){
         std::string str2 = text.substr(distrib(gen),substring_len);
-        std::vector<int> cipher = rc4_engine.cipher(str2);
+        std::vector<int> snap_header{0xAA, 0xAA, 0x03};
+        snap_header.insert( snap_header.end(), str2.begin(), str2.end() );
+        std::vector<int> cipher = rc4_engine.cipher(snap_header);
         enc.ciphers.push_back(cipher);
         print(cipher);
     }
