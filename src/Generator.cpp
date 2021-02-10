@@ -4,6 +4,16 @@
 
 #include "Generator.h"
 
+
+void print(std::vector<int> const &input) // https://www.techiedelight.com/print-vector-cpp/
+{
+    for (int i = 0; i < input.size(); i++) {
+        std::cout << input.at(i) << ' ';
+    }
+    std::cout << std::endl;
+}
+
+
 EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n) {
     EncryptedGroup enc = EncryptedGroup();
 
@@ -21,10 +31,12 @@ EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n)
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, text_len-substring_len);
 
+    // TODO: AAA
     for(int i=0; i<n; i++){
         std::string str2 = text.substr(distrib(gen),substring_len);
         std::vector<int> cipher = rc4_engine.cipher(str2);
         enc.ciphers.push_back(cipher);
+        print(cipher);
     }
 
     return enc;
@@ -34,4 +46,8 @@ Generator::Generator(std::vector<int> key) {
     // Interesting thing : key is copied by value, transfering it to the local key is
     // better than recreating it again
     this->key = std::move(key);
+}
+
+Generator::Generator(std::string key) {
+    this->key = std::vector<int> (key.begin(), key.end());
 }

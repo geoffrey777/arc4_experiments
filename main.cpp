@@ -1,5 +1,6 @@
 #include <iostream>
 #include "RC4.h"
+#include "Generator.h"
 
 using namespace std;
 
@@ -11,5 +12,8 @@ int main() {
         cout << hex << character << " ";
     }
     cout << endl;
+
+    Generator g = Generator("lol");
+    g.generate(vector<int>{1,2,4}, "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext", 10);
     return 0;
 }

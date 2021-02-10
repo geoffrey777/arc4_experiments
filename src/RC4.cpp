@@ -19,7 +19,6 @@ void RC4::key_schedule() {
 
 std::vector<int> RC4::cipher(std::vector<int> plaintext) {
     int n = plaintext.size();
-    std::cout << n << std::endl;
     std::vector<int> stream = getStream(n);
     for(int i=0; i<n; i++){
         stream[i] ^= plaintext[i];

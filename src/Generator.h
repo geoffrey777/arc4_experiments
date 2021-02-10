@@ -15,6 +15,7 @@
 class Generator {
 public:
     Generator(std::vector<int> key);
+    Generator(std::string key);
     EncryptedGroup generate(std::vector<int> iv, std::string text, int n);
 private:
     std::vector<int> key;
