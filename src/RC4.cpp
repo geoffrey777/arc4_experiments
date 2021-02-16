@@ -62,3 +62,22 @@ std::vector<int> RC4::cipher(std::string plaintext) {
     }
     return cipher(vector_plain);
 }
+
+int* RC4::getS() {
+    return S;
+}
+
+RC4::RC4(std::vector<int> key, int n) {
+    // only do keyschedule for n steps
+    this->key = key;
+    for (int i = 0; i < 256; i++) {
+        S[i] = i;
+    }
+    int j = 0;
+    for (int i = 0; i < n; i++) {
+        j = (j + S[i] + key[i % key.size()]) % 256;
+        int aux = S[i];
+        S[i] = S[j];
+        S[j] = aux;
+    }
+}

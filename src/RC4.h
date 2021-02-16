@@ -12,12 +12,13 @@ class RC4 {
 public:
     RC4(std::string key);
     RC4(std::vector<int> key);
+    RC4(std::vector<int> key, int n);
     std::vector<int> cipher(std::vector<int> plaintext);
     std::vector<int> cipher(std::string plaintext);
     std::vector<int> getStream(int n);
+    int* getS();
 private:
     int S[256];
-    int aa{3};
     std::vector<int> key;
     void key_schedule();
 
