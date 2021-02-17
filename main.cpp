@@ -6,15 +6,7 @@
 using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    RC4 aa = RC4("Key");
-    vector<int> cipher = aa.cipher("Plaintext");
-    for(auto character : cipher){
-        cout << hex << character << " ";
-    }
-    cout << endl;
-
-    Attack a = Attack("eee");
+    Attack a = Attack("eeeee");
     vector<int> b = a.attack();
     cout << b[0] << endl;
 
