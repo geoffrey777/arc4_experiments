@@ -1,6 +1,7 @@
 #include <iostream>
 #include "RC4.h"
 #include "Generator.h"
+#include "Attack.h"
 
 using namespace std;
 
@@ -13,7 +14,9 @@ int main() {
     }
     cout << endl;
 
-    Generator g = Generator("lol");
-    g.generate(vector<int>{1,2,4}, "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext", 10);
+    Attack a = Attack("eee");
+    vector<int> b = a.attack();
+    cout << b[0] << endl;
+
     return 0;
 }

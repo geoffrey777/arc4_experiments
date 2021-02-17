@@ -33,11 +33,11 @@ EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n)
 
     for(int i=0; i<n; i++){
         std::string str2 = text.substr(distrib(gen),substring_len);
-        std::vector<int> snap_header{0xAA, 0xAA, 0x03};
+        std::vector<int> snap_header{0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0x03};
         snap_header.insert( snap_header.end(), str2.begin(), str2.end() );
         std::vector<int> cipher = rc4_engine.cipher(snap_header);
         enc.ciphers.push_back(cipher);
-        print(cipher);
+        //print(cipher);
     }
 
     return enc;

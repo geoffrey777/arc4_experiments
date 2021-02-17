@@ -80,4 +80,5 @@ RC4::RC4(std::vector<int> key, int n) {
         S[i] = S[j];
         S[j] = aux;
     }
+    this->j = j;
 }

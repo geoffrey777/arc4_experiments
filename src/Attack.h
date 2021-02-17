@@ -10,6 +10,8 @@
 #include "EncryptedGroup.h"
 #include "Generator.h"
 #include <utility>
+#include <unordered_map>
+#include <map>
 
 class Attack {
 public:

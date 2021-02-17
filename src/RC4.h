@@ -17,11 +17,11 @@ public:
     std::vector<int> cipher(std::string plaintext);
     std::vector<int> getStream(int n);
     int* getS();
+    int j{0};
 private:
     int S[256];
     std::vector<int> key;
     void key_schedule();
-
 };
 
 
