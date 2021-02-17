@@ -55,6 +55,7 @@ int Attack::attack_i(int i, EncryptedGroup group) {
     wep_key.insert( wep_key.end(), key.begin(), key.end() );
 
     RC4 partial = RC4(wep_key, i);
+    //TODO: check
     int* SL = partial.getS();
     int SLL = SL[i];
     int j = partial.j;
@@ -65,6 +66,7 @@ int Attack::attack_i(int i, EncryptedGroup group) {
         suspected_bytes.push_back(candidate);
     }
 
+    //TODO: display proportion to verify there is a most frequent
     std::cout << std::dec << char(mostFrequent(suspected_bytes, 500000))  << std::endl;
     //K[L] = j L+1 - j L - SL [L]     with j L position of j in Lth KSA round and SL[L] Sbox L position at Lth round
     //J L+1 = S[L] = KS[L]            with KS[L] keystream at position L (xor clear)
