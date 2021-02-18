@@ -17,14 +17,13 @@ void print(std::vector<int> const &input) // https://www.techiedelight.com/print
 EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n) {
     EncryptedGroup enc = EncryptedGroup();
 
-    std::vector<int> wep_key = iv;
-    // https://stackoverflow.com/questions/201718/concatenating-two-stdvectors
-    wep_key.insert( wep_key.end(), key.begin(), key.end() );
-
-    enc.iv = iv;
+    std::random_device rd2;
+    std::mt19937 gen2(rd2());
+    std::uniform_int_distribution<> distrib2(0, 256);
 
     const int substring_len = 15; // Final plaintext len = 15+3 (header)
     int text_len = text.size();
+    enc.iv = iv;
 
     // https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
     std::random_device rd;
@@ -32,8 +31,15 @@ EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n)
     std::uniform_int_distribution<> distrib(0, text_len-substring_len);
 
     for(int i=0; i<n; i++){
+        std::vector<int> wep_key = iv;
+        wep_key.push_back(distrib2(gen2));
+
+        // https://stackoverflow.com/questions/201718/concatenating-two-stdvectors
+        wep_key.insert( wep_key.end(), key.begin(), key.end() );
+
         std::string str2 = text.substr(distrib(gen),substring_len);
-        std::vector<int> snap_header{0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA};
+        std::vector<int> snap_header{0xAA, 0xAA, 0x03, 0x00};
+        
         snap_header.insert( snap_header.end(), str2.begin(), str2.end() );
         std::vector<int> cipher = RC4(wep_key).cipher(snap_header);
         enc.ciphers.push_back(cipher);
