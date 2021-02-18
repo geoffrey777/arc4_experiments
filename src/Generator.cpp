@@ -4,16 +4,6 @@
 
 #include "Generator.h"
 
-
-void print(std::vector<int> const &input) // https://www.techiedelight.com/print-vector-cpp/
-{
-    for (int i = 0; i < input.size(); i++) {
-        std::cout << input.at(i) << ' ';
-    }
-    std::cout << std::endl;
-}
-
-
 EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n) {
     EncryptedGroup enc = EncryptedGroup();
 

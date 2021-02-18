@@ -18,7 +18,7 @@ public:
     Attack(std::string key);
     std::string key;
     std::vector<int> attack();
-    int attack_i(int i, EncryptedGroup group);
+    int attack_i(int i, EncryptedGroup group, std::vector<int> predicted);
     Generator generator = Generator(key);
 };
 

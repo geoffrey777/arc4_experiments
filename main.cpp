@@ -6,9 +6,8 @@
 using namespace std;
 
 int main() {
-    Attack a = Attack("eeeee");
+    Attack a = Attack("findm");
     vector<int> b = a.attack();
-    cout << b[0] << endl;
 
     return 0;
 }
