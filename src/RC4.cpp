@@ -68,7 +68,7 @@ int* RC4::getS() {
 }
 
 RC4::RC4(std::vector<int> key, int n) {
-    // only do keyschedule for n steps
+    // only do ksa for n steps
     this->key = key;
     for (int i = 0; i < 256; i++) {
         S[i] = i;

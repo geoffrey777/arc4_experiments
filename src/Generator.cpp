@@ -23,7 +23,6 @@ EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n)
 
     const int substring_len = 15; // Final plaintext len = 15+3 (header)
     int text_len = text.size();
-    enc.iv = iv;
 
     // https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
     std::random_device rd;
@@ -34,6 +33,7 @@ EncryptedGroup Generator::generate(std::vector<int> iv, std::string text, int n)
         std::vector<int> wep_key = iv;
         wep_key.push_back(distrib2(gen2));
 
+        enc.iv.emplace_back(wep_key);
         // https://stackoverflow.com/questions/201718/concatenating-two-stdvectors
         wep_key.insert( wep_key.end(), key.begin(), key.end() );
 

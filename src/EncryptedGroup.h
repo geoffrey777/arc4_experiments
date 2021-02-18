@@ -8,7 +8,7 @@
 
 class EncryptedGroup {
 public:
-    std::vector<int> iv;
+    std::vector<std::vector<int>> iv;
     std::vector<std::vector<int>> ciphers;
 };
 
